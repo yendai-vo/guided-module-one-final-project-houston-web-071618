@@ -1,5 +1,4 @@
 require_relative '../config/environment'
-
 def greet
   option = false
   while (option == false)
@@ -40,29 +39,33 @@ def open_applicant_info
   puts "Please enter number for the following options:"
   puts "-"*40
   puts " 1. Show All Applicants."
-  puts " 2. Find Applicant by name."
-  puts " 3. Find Applicant by school."
-  puts " 4. Find highest rated Applicant."
-  puts " 5. Find Applicant with most interviews."
-  puts " 6. Find Applicant(s) with rating greater than (your input)"
+  puts " 2. Show all Interviews for Applicant"
+  puts " 3. Find Applicant by name."
+  puts " 4. Find Applicant by school."
+  puts " 5. Find highest rated Applicant."
+  puts " 6. Find Applicant with most interviews."
+  puts " 7. Find Applicant(s) with rating greater than (your input)"
   user_input = gets.chomp()
 
   if user_input == "1"
-    show_all_applicants
+    Applicant.show_all_applicants
     option = true
   elsif user_input == "2"
-    find_applicant_by_name
+    Applicant.show_all_interviews_for_applicant
     option = true
   elsif user_input == "3"
-    find_applicant_by_school
+    Applicant.find_applicant_by_name
     option = true
   elsif user_input == "4"
-    find_highest_rated_applicant
+    Applicant.find_applicant_by_school
     option = true
   elsif user_input == "5"
-    find_applicant_with_most_interviews
+    Applicant.find_highest_rated_applicant
     option = true
   elsif user_input == "6"
+    Applicant.find_applicant_with_most_interviews
+    option = true
+  elsif user_input == "7"
     option_rating = false
     while (option_rating == false)
       puts "Please enter rating number range 1-10"

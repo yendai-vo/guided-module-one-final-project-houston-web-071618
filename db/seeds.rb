@@ -1,3 +1,4 @@
+
 Applicant.create(name: "Amanda",	school: "Stanford",	resume_rating: 7)
 Applicant.create(name: "Emma",	school: "Harvard",	resume_rating: 7)
 Applicant.create(name: "Cindy",	school: "University of Houston",	resume_rating: 8)
