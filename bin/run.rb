@@ -42,9 +42,8 @@ def open_applicant_info
   puts " 2. Show all Interviews for Applicant"
   puts " 3. Find Applicant by name."
   puts " 4. Find Applicant by school."
-  puts " 5. Find highest rated Applicant."
-  puts " 6. Find Applicant with most interviews."
-  puts " 7. Find Applicant(s) with rating greater than (your input)"
+  puts " 5. Find Applicant with most interviews."
+  puts " 6. Find Applicant(s) with rating greater than (your input)"
   user_input = gets.chomp()
 
   if user_input == "1"
@@ -60,18 +59,15 @@ def open_applicant_info
     Applicant.find_applicant_by_school
     option = true
   elsif user_input == "5"
-    Applicant.find_highest_rated_applicant
-    option = true
-  elsif user_input == "6"
     Applicant.find_applicant_with_most_interviews
     option = true
-  elsif user_input == "7"
+  elsif user_input == "6"
     option_rating = false
     while (option_rating == false)
       puts "Please enter rating number range 1-10"
       rating_num = gets.chomp().to_i
       if rating_num >= 1 && rating_num <=10
-        find_applicant_with_rating_num(rating_num)
+        Applicant.find_applicant_with_rating_num(rating_num)
             option = true
             option_rating = true
       else
@@ -91,7 +87,7 @@ end #while
 end
 
 def open_interviewer_info
-    option = false
+  option = false
   while (option == false)
     puts "-"*40
     puts " "
@@ -102,28 +98,24 @@ def open_interviewer_info
     puts " 1. Show all interviewers."
     puts " 2. Find Interviewer by name."
     puts " 3. Find Interviewer by job title."
-    puts " 4. Find Interviewer giving highest average rating."
-    puts " 5. Find Interviewer giving lowest average rating."
-    puts " 6. Find Interviewer conducting most interviews."
+    puts " 4. Find Interviewer's average rating."
+    puts " 5. Find Interviewer(s) conducting most interviews."
     user_input = gets.chomp()
 
     if user_input == "1"
-      show_all_interviewers
+      Interviewer.show_all_interviewers
       option = true
     elsif user_input == "2"
-      find_interviewer_by_name
+      Interviewer.find_interviewer_by_name
       option = true
     elsif user_input == "3"
-        find_interviewer_by_job_title
+      Interviewer.find_interviewer_by_job_title
         option = true
     elsif user_input == "4"
-      find_interviewer_highest_avg_ranking
+      Interviewer.find_interviewer_avg_rating
       option = true
     elsif user_input == "5"
-      find_interviewer_lowest_avg_ranking
-      option = true
-    elsif user_input == "6"
-      find_interviewer_conducting_most_interviews
+      Interviewer.find_interviewer_conducting_most_interviews
       option = true
     else
       puts "*"*40
@@ -147,7 +139,7 @@ def open_interview_info
       user_input = gets.chomp()
 
     if user_input == "1"
-      show_all_interviews
+      Interview.show_all_interviews
       option = true
     elsif user_input == "2"
       option_rating = false
@@ -155,8 +147,8 @@ def open_interview_info
         puts "Please enter rating number range 1-10"
         rating_num = gets.chomp().to_i
         if rating_num >= 1 && rating_num <=10
-          show_interviews_with_rating_num(rating_num)
-                option = true
+          Interview.show_interviews_with_rating_num(rating_num)
+              option = true
               option_rating = true
         else
           puts "--- Invalid Option #{rating_num}."
