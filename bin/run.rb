@@ -11,7 +11,6 @@ def greet
     puts " 2. Find Interviewer Information."
     puts " 3. Find Interview Information."
     user_input = gets.chomp()
-
     if user_input == "1"
       open_applicant_info
       option = true
@@ -22,10 +21,11 @@ def greet
       open_interview_info
       option = true
     else
-      puts "**************************"
+    puts "**************************"
     puts "--- Invalid Option #{user_input}."
     puts "--- Try Again."
-      puts "**************************"
+    puts "**************************"
+    
     end
   end #while
 end#greeting
@@ -39,29 +39,25 @@ def open_applicant_info
   puts "Please enter number for the following options:"
   puts "-"*40
   puts " 1. Show All Applicants."
-  puts " 2. Show all Interviews for Applicant"
-  puts " 3. Find Applicant by name."
-  puts " 4. Find Applicant by school."
-  puts " 5. Find Applicant with most interviews."
-  puts " 6. Find Applicant(s) with rating greater than (your input)"
+  puts " 2. Find Applicant by name."
+  puts " 3. Find Applicant by school."
+  puts " 4. Find Applicant with most interviews."
+  puts " 5. Find Applicant(s) with rating greater than (your input)"
   user_input = gets.chomp()
 
   if user_input == "1"
     Applicant.show_all_applicants
     option = true
   elsif user_input == "2"
-    Applicant.show_all_interviews_for_applicant
-    option = true
-  elsif user_input == "3"
     Applicant.find_applicant_by_name
     option = true
-  elsif user_input == "4"
+  elsif user_input == "3"
     Applicant.find_applicant_by_school
     option = true
-  elsif user_input == "5"
+  elsif user_input == "4"
     Applicant.find_applicant_with_most_interviews
     option = true
-  elsif user_input == "6"
+  elsif user_input == "5"
     option_rating = false
     while (option_rating == false)
       puts "Please enter rating number range 1-10"
@@ -115,7 +111,7 @@ def open_interviewer_info
       Interviewer.find_interviewer_avg_rating
       option = true
     elsif user_input == "5"
-      Interviewer.find_interviewer_conducting_most_interviews
+      Interviewer.find_interviewer_with_most_interviews
       option = true
     else
       puts "*"*40

@@ -5,35 +5,73 @@ class Applicant < ActiveRecord::Base
   def self.show_all_applicants
     p Applicant.all
   end
+
+  def self.list_of_all_app_names
+    Applicant.all.map(&:name)
+  end
  
   def self.show_all_interviews_for_applicant
     puts "Please enter applicant name: "
     appl_name = gets.chomp().capitalize
-    p Interview.where(name: appl_name)
+
+    if list_of_all_app_names.include?(appl_name)
+      p Applicant.find_by(name: appl_name)
+    else
+      puts "*" * 40
+      puts "--- Applicant does not exist."
+      puts "--- Please try again."
+      puts "*" * 40
+      show_all_interviews_for_applicant
+    end
   end
 
   def self.find_applicant_by_name
     puts "Please enter applicant name: "
     appl_name = gets.chomp().capitalize
-    p Applicant.find_by(name: appl_name)
+
+    if list_of_all_app_names.include?(appl_name)
+      p Applicant.find_by(name: appl_name)
+    else
+      puts "*" * 40
+      puts "--- Applicant does not exist."
+      puts "--- Please try again."
+      puts "*" * 40
+      find_applicant_by_name
+    end
+  end
+
+  def self.list_of_all_school_names
+    Applicant.all.map(&:school)
   end
 
   def self.find_applicant_by_school
     puts "Please enter school name: "
     school_name = gets.chomp().titleize
-    p Applicant.where(school: school_name)
+
+    if list_of_all_school_names.include?(school_name)
+      app = Applicant.where(school: school_name)
+      p app.map(&:name)
+    else
+      puts "*" * 40
+      puts "--- School does not exist."
+      puts "--- Please try again."
+      puts "*" * 40
+      find_applicant_by_school
+    end
   end
 
   def self.find_applicant_with_most_interviews
-    Applicant.all.reduce([Applicant.first]) do |most_interviewed_applicants, current_applicant|
-      most_interviewed_applicant = most_interviewed_applicants.first
-      if current_applicant.interviews.count > most_interviewed_applicant.interviews.count
-        most_interviewed_applicants = [current_applicant]
-      elsif current_applicant.interviews.count == most_interviewed_applicant.interviews.count
-        most_interviewed_applicants << current_applicant
+    array = []
+    Applicant.all.each do |x|
+      array.first || array << x
+      if x.interviews.count > array.first.interviews.count
+        array.clear
+        array << x
+      elsif x.interviews.count == array.first.interviews
+        array << x
       end
-      p most_interviewed_applicants
     end
+    array.each { |x| p x.name }
   end
 
   def self.find_applicant_with_rating_num(rating_num)
